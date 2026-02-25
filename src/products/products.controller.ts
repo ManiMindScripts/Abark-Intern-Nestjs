@@ -12,7 +12,7 @@ export class ProductsController {
 
   @Get()
   findAll(@Query('category') category?: string) {
-    return this.productsService.findAll(category);
+    return this.productsService.findAll(category)
   }
 
   @Get(':id')

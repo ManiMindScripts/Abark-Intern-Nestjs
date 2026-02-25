@@ -5,7 +5,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
-    private products: Product[] = [];
+    private products: Product[] = []
     private idCounter = 1
 
     findAll(category?: string): Product[] {
