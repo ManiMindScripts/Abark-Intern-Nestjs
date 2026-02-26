@@ -1,11 +1,31 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
+import { PostsModule } from './posts/posts.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
-  imports: [ProductsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    TypeOrmModule.forRoot({
+            type: 'postgres',
+            host: process.env.DB_HOST,
+            port: +(process.env.DB_PORT || 5432),
+            username: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
+            autoLoadEntities: true,
+            synchronize: true,
+    }),
+    ProductsModule,
+    PostsModule,
+    CategoriesModule],
+   controllers: [AppController],
+   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
