@@ -6,7 +6,7 @@ export class Post{
     @PrimaryGeneratedColumn()
     id: number
     @Column()
-    tite: string
+    title: string
     @Column('text')
     content: string
     @Column({default: false})
